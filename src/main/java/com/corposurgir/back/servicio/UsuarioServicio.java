@@ -14,5 +14,5 @@ public interface UsuarioServicio {
 
     public List<EntidadUsuario> obtenerTodosUsuarios();
 
-    public void eliminarUsuario(String documento);
+    public EntidadUsuario eliminarUsuario(String documento);
 }

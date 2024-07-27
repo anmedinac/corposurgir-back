@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.Arrays;
 
@@ -18,14 +20,16 @@ public class AppConfig {
      * este caso para ustedes sería colocar la url de su front, y sera la unica que se pueda conectar a nuestro back
      */
     @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(Arrays.asList("http://localhost:4200", "*"));
-        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        config.setAllowCredentials(true);
-        config.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));
-        UrlBasedCorsConfigurationSource cors = new UrlBasedCorsConfigurationSource();
-        cors.registerCorsConfiguration("/**", config);
-        return cors;
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedOrigins("http://localhost:4200") // Permitir este origen
+                        .allowedMethods("GET", "POST", "PUT", "DELETE") // Métodos permitidos
+                        .allowedHeaders("*") // Cabeceras permitidas
+                        .allowCredentials(true); // Permitir credenciales (cookies, autorizaciones)
+            }
+        };
     }
 }

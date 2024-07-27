@@ -26,25 +26,25 @@ public class UsuarioControlador {
     }
 
     @PutMapping("/modificar-usuario/{documento}")
-    public ResponseEntity<?> modificarUsuario(@RequestBody EntidadUsuario usuario, @PathVariable String documento){
-        return ResponseEntity.ok(usuarioServicio.modificarUsuario(documento,usuario));
+    public ResponseEntity<?> modificarUsuario(@RequestBody EntidadUsuario usuario, @PathVariable String documento) {
+        return ResponseEntity.ok(usuarioServicio.modificarUsuario(documento, usuario));
     }
 
     @GetMapping("/usuario-por-documento/{documento}")
-    public ResponseEntity<?> obtenerUsuarioPorDocumento(@PathVariable String documento){
+    public ResponseEntity<?> obtenerUsuarioPorDocumento(@PathVariable String documento) {
         return ResponseEntity.ok(usuarioServicio.obtenerPorDocumento(documento));
     }
 
 
-    @GetMapping( "/todos-los-usuarios")
-    public ResponseEntity<?> obtenerTodosLosUsuarios(){
+    @GetMapping("/todos-los-usuarios")
+    public ResponseEntity<?> obtenerTodosLosUsuarios() {
         return ResponseEntity.ok(usuarioServicio.obtenerTodosUsuarios());
     }
 
     @DeleteMapping("/eliminar-usuario/{documento}")
-    public ResponseEntity<?> eliminarUsuario(@PathVariable String documento){
-        usuarioServicio.eliminarUsuario(documento);
-        return ResponseEntity.ok("Se elimina usuario correctamente");
+    public ResponseEntity<?> eliminarUsuario(@PathVariable String documento) {
+
+        return ResponseEntity.ok(usuarioServicio.eliminarUsuario(documento));
     }
 
 }

@@ -51,7 +51,9 @@ public class UsuarioServicioImpl implements UsuarioServicio{
     }
 
     @Override
-    public void eliminarUsuario(String documento) {
+    public EntidadUsuario eliminarUsuario(String documento) {
+        EntidadUsuario usuarioAEliminar = usuarioRepositorio.findById(documento).orElse(null);
         usuarioRepositorio.deleteById(documento);
+        return usuarioAEliminar;
     }
 }
